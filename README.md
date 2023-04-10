@@ -14,5 +14,18 @@ serverless create --template aws-python3 --path my-function
 '''
 
 
+# to install libraries
+cd web-dev-tutorial/web-app-example
+npm install @mui/material @emotion/react @emotion/styled --save
+
+# to start the application
+npm start
+
+
+#Install axios
+npm i axios --save
+
+
+
 npm run build
 serve -s build
