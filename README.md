@@ -12,3 +12,7 @@
 '''
 serverless create --template aws-python3 --path my-function
 '''
+
+
+npm run build
+serve -s build
