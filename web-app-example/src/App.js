@@ -1,23 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import Button from '@mui/material/Button';
+import axios from 'axios';
 
 function App() {
+
+  const handleClick = async () => {
+    const result = await axios.get("https://g8a0y6fe28.execute-api.us-east-1.amazonaws.com/marco")
+    alert(result.data.mesage)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Button variant="outlined" onClick={handleClick}>Outlined</Button>
     </div>
   );
 }
