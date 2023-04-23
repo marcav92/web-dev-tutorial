@@ -58,9 +58,9 @@ provider:
 #    - include-me.py
 #    - include-me-dir/**
 
-custom:
-    pythonRequirements:
-        dockerizePip: true
+# custom:
+#     pythonRequirements:
+#         dockerizePip: true
 
 plugins:
   - serverless-python-requirements

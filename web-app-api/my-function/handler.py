@@ -35,4 +35,13 @@ def read_contact():
     )
     return contact
 
+@app.post("/contacts/{name}")
+def write_contact(name):
+    contact = Contact(
+        name=name,
+        phone_number="555-123-4567",
+        email="john.doe@example.com"
+    )
+    return contact
+
 handler = Mangum(app)
