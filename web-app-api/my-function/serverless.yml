@@ -58,20 +58,31 @@ provider:
 #    - include-me.py
 #    - include-me-dir/**
 
+custom:
+    pythonRequirements:
+        dockerizePip: true
+
+plugins:
+  - serverless-python-requirements
+
+
 functions:
   hello:
-    handler: handler.hello
+    handler: handler.handler
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
     events:
-      - httpApi:
-          path: /marco
-          method: get
-          
-      - httpApi:
-          path: /hola
-          method: post
+      - http:
+          path: /
+          method: ANY
+          cors: true
+
+      - http:
+          path: /{proxy+}
+          method: ANY
+          cors: true
+
 
   # hello2:
   #   handler: handler.hello

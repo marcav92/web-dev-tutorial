@@ -7,7 +7,7 @@ function App() {
 
   const handleClick = async () => {
     const result = await axios.get("https://g8a0y6fe28.execute-api.us-east-1.amazonaws.com/marco")
-    alert(result.data.mesage)
+    alert(result.data.message)
   }
 
   return (

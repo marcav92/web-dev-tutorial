@@ -1,27 +1,38 @@
-import json
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, EmailStr
+from mangum import Mangum
 
+app = FastAPI()
 
-def hello(event, context):
-    body = {
-        "message": "Go Serverless v1.0! Your function executed successfully!",
-        "input": event
-    }
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-    response = {
-        "statusCode": 200,
-        "body": json.dumps(body),
-        'headers': {
-            'Access-Control-Allow-Origin': '*'
-        }
-    }
+class Contact(BaseModel):
+    name: str
+    phone_number: str
+    email: EmailStr
 
-    return response
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
 
-    # Use this code if you don't use the http event with the LAMBDA-PROXY
-    # integration
-    """
-    return {
-        "message": "Go Serverless v1.0! Your function executed successfully!",
-        "event": event
-    }
-    """
+@app.get("/items/{item_id}")
+def read_item(item_id: int, q: str = None):
+    return {"item_id": item_id, "q": q}
+
+@app.get("/contacts")
+def read_contact():
+    contact = Contact(
+        name="John Doe",
+        phone_number="555-123-4567",
+        email="john.doe@example.com"
+    )
+    return contact
+
+handler = Mangum(app)
